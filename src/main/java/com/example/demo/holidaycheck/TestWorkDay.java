@@ -24,7 +24,7 @@ public class TestWorkDay {
             ca.setTime(date);//设定当前时间
             ReadExcel readExcel = new ReadExcel(); //建立读取Excel数据
             File file = new File(path);//设置路径
-            //File file1=new File("D:holidayList.xls");
+            //File file=new File("D:holidayList.xls");
             List excelList = readExcel.readExcel(file);//将读取到的数据放入list中
             for (int i = 0; i < excelList.size(); i++) {
                 List list = (List) excelList.get(i);//将每一条信息提取出来进入另一个list中
@@ -32,18 +32,19 @@ public class TestWorkDay {
                     testWorkDay.initWeekendList(list.get(j).toString());//将节假日信息放入判断库中
                 }
             }
+            testWorkDay.initWeekendList("2019-06-17");
             boolean k = checkHoliday(ca);//进行判断
-            if (k == true) {
-                System.out.println(truething);
-            } else
+            boolean l = checkWeekend(ca);
+            System.out.println(k);
+            if (k == true || l == true) {
                 System.out.println(falsething);
+            } else
+                System.out.println(truething);
         } catch (Exception e) {
             System.out.println(e.getClass());
             e.printStackTrace();
         }
     }
-
-
 
 
     /**
@@ -53,34 +54,39 @@ public class TestWorkDay {
      * @return return boolean    返回类型  返回true是节假日，返回false不是节假日
      * throws
      */
-    public static boolean checkHoliday(Calendar calendar) throws Exception {
+    public static boolean checkWeekend(Calendar calendar) throws Exception {
 
         //判断日期是否是周六周日
         if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY ||
                 calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
 
-            //判断日期是否是节假日
             for (Calendar ca : weekendList) {
                 if (ca.get(Calendar.MONTH) == calendar.get(Calendar.MONTH) &&
                         ca.get(Calendar.DAY_OF_MONTH) == calendar.get(Calendar.DAY_OF_MONTH) &&
                         ca.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
-                    return false;
+                    return true;
                 }
             }
-
-            return true;
         }
+        return false;
+    }
+
+    public static boolean checkHoliday(Calendar calendar) throws Exception {
         //判断日期是否是节假日
-        for (Calendar ca : holidayList) {
-            if (ca.get(Calendar.MONTH) == calendar.get(Calendar.MONTH) &&
-                    ca.get(Calendar.DAY_OF_MONTH) == calendar.get(Calendar.DAY_OF_MONTH) &&
-                    ca.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
-                return false;
+        if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY ||
+                calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+
+            for (Calendar ca : holidayList) {
+                if (ca.get(Calendar.MONTH) == calendar.get(Calendar.MONTH) &&
+                        ca.get(Calendar.DAY_OF_MONTH) == calendar.get(Calendar.DAY_OF_MONTH) &&
+                        ca.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
+                    return true;
+                }
             }
         }
-
-        return true;
+        return false;
     }
+
 
     /**
      * 把所有节假日放入list
