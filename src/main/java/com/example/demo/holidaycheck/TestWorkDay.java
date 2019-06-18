@@ -55,7 +55,6 @@ public class TestWorkDay {
      * throws
      */
     public static boolean checkWeekend(Calendar calendar) throws Exception {
-
         //判断日期是否是周六周日
         if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY ||
                 calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
@@ -63,12 +62,11 @@ public class TestWorkDay {
             for (Calendar ca : weekendList) {
                 if (ca.get(Calendar.MONTH) == calendar.get(Calendar.MONTH) &&
                         ca.get(Calendar.DAY_OF_MONTH) == calendar.get(Calendar.DAY_OF_MONTH) &&
-                        ca.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
-                    return true;
-                }
+                        ca.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) return true;
             }
         }
         return false;
+
     }
 
     public static boolean checkHoliday(Calendar calendar) throws Exception {
@@ -79,9 +77,7 @@ public class TestWorkDay {
             for (Calendar ca : holidayList) {
                 if (ca.get(Calendar.MONTH) == calendar.get(Calendar.MONTH) &&
                         ca.get(Calendar.DAY_OF_MONTH) == calendar.get(Calendar.DAY_OF_MONTH) &&
-                        ca.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
-                    return true;
-                }
+                        ca.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) return true;
             }
         }
         return false;

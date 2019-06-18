@@ -1,7 +1,5 @@
 package com.example.demo.holidaycheck;
 
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
