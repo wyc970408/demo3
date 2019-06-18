@@ -10,11 +10,10 @@ public class TestController {
     @GetMapping("check")
     @RequestMapping(value = "/check", method = RequestMethod.GET)
     public String check(@RequestParam String params) {
-        WorkDay workDay = new WorkDay();
-        String truething = "今天需要上班";
-        String falsething = "今天放假";
-        String k = workDay.JuageMentTest(params, truething, falsething);
-        return k;
+        TestServiceImpl testService = new TestServiceImpl();
+        String truething = "1";
+        String falsething = "0";
+        return testService.JuageMentTest(params, truething, falsething);
     }
 
 }

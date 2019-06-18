@@ -5,5 +5,5 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @Service
 public interface TestService {
-    public void JuageMentTest(String date, String truething, String falsething);
+    public String JuageMentTest(String date, String truething, String falsething);
 }
